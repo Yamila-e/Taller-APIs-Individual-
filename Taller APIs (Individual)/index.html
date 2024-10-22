@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat API Example</title>
+</head>
+<body>
+    <h1>Imágenes de Gatos</h1>
+    <div id="cat-images"></div>
+    <script>
+        const apiKey = 'live_GMzVcRhwYDFKwDTq9cjAw8wHUD7QMJxa3UtXXq0ED5UmWrJ90njERNoYdY5yUBqg'; // Reemplaza con tu clave API
+        const apiUrl = 'https://api.thecatapi.com/v1/images/search?limit=5';
+
+        fetch(apiUrl, {
+            headers: {
+                'x-api-key': apiKey
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const catImagesDiv = document.getElementById('cat-images');
+            data.forEach(cat => {
+                const img = document.createElement('img');
+                img.src = cat.url;
+                img.alt = 'Gato';
+                img.style.width = '200px'; // Ajusta el tamaño según lo desees
+                catImagesDiv.appendChild(img);
+            });
+        })
+        .catch(error => {
+            console.error('Error al obtener las imágenes:', error);
+        });
+    </script>
+</body>
+</html>
